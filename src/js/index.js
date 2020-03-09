@@ -2,6 +2,7 @@
 
 //The controllers will be placed here
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
 import {domElements, renderLoader, clearLoader} from './views/baseSelectors';
 
@@ -12,7 +13,7 @@ import {domElements, renderLoader, clearLoader} from './views/baseSelectors';
 4th - liked recipes
 */
 const state = {};
-
+//Search Controller
 const controlSearch = async ()=> {
   // 1st - get query from view
   const query = searchView.getInput();
@@ -50,3 +51,8 @@ domElements.searchResultPages.addEventListener('click', event =>{
     searchView.renderResult(state.search.result, paginationNumber);
   }
 });
+
+//recipe controller
+const r = new Recipe(35107);
+r.getRecipe();
+console.log(r);
