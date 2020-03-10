@@ -12,15 +12,19 @@ export default class Recipe {
       this.image = result.data.recipe.image_url;
       this.url = result.data.recipe.source_url;
       this.ingredients = result.data.recipe.ingredients;
-      console.log(result.data.recipe);
+
     } catch(error){
-      alert(error);
+        alert(`Ops... could not get the recipe!\n ${error})`);
     }
   }
 
-  calcTime(){
-    const numberOfIngredients = this.ingredients.lenght;
-    const periods = Math.ceil((this.numberOfIngredients / 3));
-    this.cookingTime = this.periods * 15;
+  calculateTime(){
+    const numberOfIngredients = this.ingredients.length;
+    const periods = Math.ceil((numberOfIngredients / 3));
+    this.cookingTime = periods * 15;
+  }
+
+  calculateServings(){
+    this.servings = 4; 
   }
 }
