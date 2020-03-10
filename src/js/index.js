@@ -55,7 +55,7 @@ domElements.searchResultPages.addEventListener('click', event =>{
   }
 });
 
-//recipe controller
+//Recipe controller
 const controlRecipe = async () => {
   const id = window.location.hash.replace('#', '');
   console.log(id);
@@ -65,12 +65,14 @@ const controlRecipe = async () => {
     //Create a new recipe obj
     state.recipe = new Recipe(id);
 
+    //Testing
+    window.r = state.recipe;
     //Get recipe data
     try{
       await state.recipe.getRecipe();
 
       //Calc servings and time
-     state.recipe.calculateTime();
+      state.recipe.calculateTime();
       state.recipe.calculateServings();
 
       //Render recipe
