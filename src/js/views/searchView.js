@@ -51,6 +51,7 @@ const createBtn = (page, type) => `
     
   </button>
 `;
+
 const renderPagesButton = (resultsNumber, resultsPerPage, currentPage) => {
   const totalPages = Math.ceil((resultsNumber / resultsPerPage));
   let button;
@@ -70,6 +71,7 @@ const renderPagesButton = (resultsNumber, resultsPerPage, currentPage) => {
 
   domElements.searchResultPages.insertAdjacentHTML('afterbegin', button);
 }
+
 export const renderResult = (recipe, page = 1, resultsPerPage = 10) =>{
   //rendering the results of the current page
   const start = (page - 1) * resultsPerPage;
