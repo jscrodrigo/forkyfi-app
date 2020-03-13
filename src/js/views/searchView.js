@@ -11,6 +11,14 @@ export const clearResultlist = () => {
   domElements.searchResultPages.innerHTML = '';
 };
 
+export const highlightSelected = id =>{
+  const resultArray = Array.from(document.querySelectorAll('.results__link'));
+  resultArray.forEach(current => {
+    current.classList.remove('results__link--active');
+  });
+  document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+};
+
 const limitRecipeTitle = (recipeTitle, charLimit = 18) =>{
   const newTitle = [];
   if(recipeTitle.length >= charLimit){
