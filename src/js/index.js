@@ -56,7 +56,7 @@ domElements.searchResultPages.addEventListener('click', event =>{
   }
 });
 
-//Recipe controller
+/*Recipe controller*/
 const controlRecipe = async () => {
   const id = window.location.hash.replace('#', '');
   console.log(id);
@@ -64,7 +64,9 @@ const controlRecipe = async () => {
     // Prepare UI for changes
     recipeView.clearRecipe();
     renderLoader(domElements.recipeResult);
-    searchView.highlightSelected(id);
+    if(state.search){
+      searchView.highlightSelected(id);
+    }
     //Create a new recipe obj
     state.recipe = new Recipe(id);
     
@@ -72,6 +74,7 @@ const controlRecipe = async () => {
     try{
       await state.recipe.getRecipe();
       state.recipe.parseIngredients();
+
       //Calc servings and time
       state.recipe.calculateTime();
       state.recipe.calculateServings();
@@ -79,10 +82,27 @@ const controlRecipe = async () => {
       //Render recipe
       clearLoader();
       recipeView.renderRecipe(state.recipe);
+
     } catch(error){
       alert(`Could not find a recipe.\n ${error}`);
     }
     
   }
-}
+};
+
 ['hashchange', 'load'].forEach(current => window.addEventListener(current, controlRecipe));
+
+//Handing recipes button clicks
+domElements.recipeResult.addEventListener('click', event =>{
+  if(event.target.matches('.btn-decrease, .btn-decrease *')) {
+    // Decrease button was clicked
+    if(state.recipe.servings > 1){
+      state.recipe.updateServings('dec');
+      recipeView.updateServingsIngredients(state.recipe);
+    }
+  } else if(event.target.matches('.btn-increase, .btn-increase *')) {
+    //Increase button was clicked
+    state.recipe.updateServings('inc');
+    recipeView.updateServingsIngredients(state.recipe);
+  }
+});

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export default class Recipe {
   constructor(id){
     this.id = id;
@@ -80,5 +81,15 @@ export default class Recipe {
       return objIng;
     });
     this.ingredients = newIngredients;
+  }
+
+  updateServings(type){
+    //update servings
+    const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+    this.ingredients.forEach(current =>{
+      current.count *= (newServings/this.servings);
+    });
+    //update ingredients
+    this.servings = newServings;
   }
 }
