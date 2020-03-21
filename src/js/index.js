@@ -3,6 +3,7 @@
 //The controllers will be placed here
 import Search from './models/Search';
 import Recipe from './models/Recipe';
+import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import {domElements, renderLoader, clearLoader} from './views/baseSelectors';
@@ -106,3 +107,5 @@ domElements.recipeResult.addEventListener('click', event =>{
     recipeView.updateServingsIngredients(state.recipe);
   }
 });
+
+window.list = new List();
